@@ -26,6 +26,9 @@ $ python3 -m pip install -r requirements.txt
 $ python3 convert.py --outfile models/7B/ggml-model-f16.bin --outtype f16 ../CodeLlama-13b-hf
 $ make
 $ ./quantize  ./models/7B/ggml-model-f16.bin ./models/7B/ggml-model-q4_0.bin q4_0
+```
+Test model in terminal:
+```bash
 $ ./main -m ./models/7B/ggml-model-q4_0.bin -n 1024 --repeat_penalty 1.0 --color -i -r "User:" -f ./prompts/chat-with-bob.txt
 ```
 
