@@ -1,5 +1,9 @@
 from django.shortcuts import render, redirect
 import subprocess
+import yaml
+
+with open("conf/Paths.yaml") as file:
+    config = yaml.full_load(file)
 
 
 def home(request):
@@ -23,15 +27,14 @@ def home(request):
             request.session.modified = True
             prompt = request.session['messages'][-1]["content"]
             response = subprocess.run(
-                ["/Users/vdc/llm-chat-local/llama.cpp/main",
-                 "-m", "/Users/vdc/llm-chat-local/llama.cpp/models/7B/ggml-model-q4_0.bin",
+                [f"{config['bin']}/main",
+                 "-m", f"{config['bin']}/models/{config['parameters']}/{config['model']}",
                  "--repeat_penalty", "1.0",
                  "--temp", f"{temperature}",
                  "-i", "--prompt", prompt,
                  "-n", "-2"],
-                capture_output=True, text=True
+                capture_output=True, text=True,
             )
-            print(response.stdout)
             # append the response to the messages list
             request.session['messages'].append({"role": "assistant", "content": response.stdout})
             print(request.session['messages'])
