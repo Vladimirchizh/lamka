@@ -6,7 +6,7 @@
 ```bash
 $ mkdir llm-chat-local && cd llm-chat-local
 $ git lfs install 
-$ git clone git clone https://huggingface.co/codellama/CodeLlama-13b-hf
+$ git clone https://huggingface.co/codellama/CodeLlama-13b-hf
 $ git clone https://github.com/facebookresearch/llama
 $ git clone: https://github.com/ggerganov/llama.cpp
 ```
@@ -23,9 +23,10 @@ $ git clone https://github.com/Vladimirchizh/lamka.git
 ```bash
 $ cd llama.cpp
 $ python3 -m pip install -r requirements.txt
-$ python3 convert.py --outfile models/7B/ggml-model-f16.bin --outtype f16 ../CodeLlama-13b-hf
+$ mkdir models/13B
+$ python3 convert.py --outfile models/13B/ggml-model-f16.bin --outtype f16 ../CodeLlama-13b-hf
 $ make
-$ ./quantize  ./models/7B/ggml-model-f16.bin ./models/7B/ggml-model-q4_0.bin q4_0
+$ ./quantize  ./models/13B/ggml-model-f16.bin ./models/13B/ggml-model-q4_0.bin q4_0
 ```
 Test model in terminal:
 ```bash
